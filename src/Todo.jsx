@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./styles.css";
+import {InputTodo} from  "./components/InputTodo";
+import {IncompleteTodos} from  "./components/IncompleteTodos";
+import { CompleteTodos } from "./components/CompleteTodos";
 
 export const Todo = () => {
   const [todoText, setTodoText] = useState("");
   const [incompleteTodos, setIncompleteTodos] = useState([
-    "todoです1",
-    "todoです2",
   ]);
 
   const [completeTodos, setCompleteTodos] = useState([
@@ -46,42 +47,20 @@ export const Todo = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="todoを入力"
-          value={todoText}
-          onChange={onChangeText}
-        />
-        <button onClick={onClickAdd}> 追加 </button>
-      </div>
-      <div className="incomplete-area">
-        <p className="title">未完了のtodo</p>
-        <ul>
-          {incompleteTodos.map((todo, index) => (
-            <li key={todo}>
-              <div className="list-row">
-                <p className="todo-item">{todo}</p>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="complete-area">
-        <p className="title">完了済のtodo</p>
-        <ul>
-          {completeTodos.map((todo, index) => (
-            <li key={todo}>
-              <div className="list-row">
-                <p className="todo-item">{todo}</p>
-                <button onClick={() => onClickReturn(index)}>戻す</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <InputTodo 
+        todoText={todoText} 
+        onChange={onChangeText} 
+        onClick={onClickAdd} 
+      />
+      <IncompleteTodos 
+        todos = {incompleteTodos} 
+        onClickComplete={onClickComplete}
+        onClickDelete = {onClickDelete}
+      />
+      <CompleteTodos
+      todos={completeTodos} 
+      onClickReturn={onClickReturn} 
+      />
     </>
   );
 };
