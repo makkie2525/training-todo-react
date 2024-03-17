@@ -14,7 +14,7 @@ export const IncompleteTodos = (props)=>{
         <p className="title">未完了のtodo</p>
         <ul>
           {todos.map((todo, index) => (
-            <li key={todo}>
+            <li key={index}>
               <div className="list-row">
                 <p className="todo-item">{todo}</p>
                 <button onClick={() => onClickComplete(index)}>完了</button>
