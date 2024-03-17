@@ -47,13 +47,19 @@ export const Todo = () => {
 
   const isMaxLimitIncompleteTodos = incompleteTodos.length >= 5;
 
+  const onKeyDown = (e) =>{
+    if(e.key === "Enter"){
+      onClickAdd();
+    }
+  }
   return (
     <>
       <InputTodo 
         todoText={todoText} 
         onChange={onChangeText} 
         onClick={onClickAdd} 
-        disabled={isMaxLimitIncompleteTodos}
+        disabled={isMaxLimitIncompleteTodos} 
+        onKeyDown={onKeyDown}
       />
       {isMaxLimitIncompleteTodos && (
         <p style={{color: "red"}}>
